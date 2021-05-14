@@ -5,7 +5,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EmployeeResolver } from './employee/employee.resolver';
 import { EmployeeService } from './employee/employee.service';
-import { VoucherModel } from './voucher/voucher.model';
 import { OrderService } from './order/order.service';
 import { OrderResolver } from './order/order.resolver';
 import { VoucherService } from './voucher/voucher.service';

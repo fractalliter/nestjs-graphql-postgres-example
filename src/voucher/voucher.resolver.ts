@@ -4,16 +4,16 @@ import { Inject } from '@nestjs/common';
 import { VoucherService } from './voucher.service';
 import { RevenueModel } from './revenue.model';
 
-@Resolver((of) => VoucherModel)
+@Resolver(() => VoucherModel)
 export class VoucherResolver {
   constructor(@Inject(VoucherService) private voucherService: VoucherService) {}
 
-  @Query((returns) => VoucherModel)
+  @Query(() => VoucherModel)
   async getVoucher(@Args('id') id: number): Promise<VoucherModel> {
     return await this.voucherService.getVoucherById(id);
   }
 
-  @Query((returns) => [RevenueModel])
+  @Query(() => [RevenueModel])
   async getRevenue(): Promise<RevenueModel[]> {
     return await this.voucherService.revenuePerPartner();
   }

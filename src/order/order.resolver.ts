@@ -3,11 +3,11 @@ import { OrderModel } from './order.model';
 import { Inject } from '@nestjs/common';
 import { OrderService } from './order.service';
 
-@Resolver((of) => OrderModel)
+@Resolver(() => OrderModel)
 export class OrderResolver {
   constructor(@Inject(OrderService) private orderService: OrderService) {}
 
-  @Query((returns) => OrderModel)
+  @Query(() => OrderModel)
   async getOrder(@Args('id') id: number): Promise<OrderModel> {
     return this.orderService.getOrderById(id);
   }

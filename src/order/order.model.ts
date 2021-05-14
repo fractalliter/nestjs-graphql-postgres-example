@@ -2,7 +2,6 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import {
   BaseEntity,
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -24,13 +23,13 @@ export class OrderModel extends BaseEntity {
   @Column({ name: 'Order Date' })
   orderDate: string;
 
-  @Field((type) => EmployeeModel, { nullable: false })
-  @ManyToOne((type) => EmployeeModel, (employee) => employee.employeeID)
+  @Field(() => EmployeeModel, { nullable: false })
+  @ManyToOne(() => EmployeeModel, (employee) => employee.employeeID)
   @JoinColumn({ name: 'Employee ID' })
   employee: EmployeeModel;
 
-  @Field((type) => VoucherModel, { nullable: false })
-  @ManyToOne((type) => VoucherModel, (voucher) => voucher.voucherID)
+  @Field(() => VoucherModel, { nullable: false })
+  @ManyToOne(() => VoucherModel, (voucher) => voucher.voucherID)
   @JoinColumn({ name: 'Voucher ID' })
   voucher: EmployeeModel;
 }
