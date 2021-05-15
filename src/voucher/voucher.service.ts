@@ -9,8 +9,15 @@ export class VoucherService {
   }
 
   async revenuePerPartner(): Promise<RevenueModel[]> {
-    return await VoucherModel.query(
-      'select "Partner ID" as partner, sum("Voucher Amount") as revenue from public.vouchers group by "Partner ID"',
-    );
+    return await VoucherModel.query(`
+            select
+               "Partner ID" as partner,
+               "Partner Name" as "partnerName",
+               sum("Voucher Amount") as revenue
+            from public.vouchers
+                left join orders using("Voucher ID")
+            group by partner, "partnerName"
+            order by revenue DESC
+    `);
   }
 }

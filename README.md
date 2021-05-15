@@ -127,6 +127,7 @@ List the revenue per partner
 getRevenue{
     revenue
     partner
+    partnerName
   }
 ```
 
@@ -137,12 +138,14 @@ then you will get following response:
   "data": {
     "getRevenue": [
       {
-        "revenue": 111,
-        "partner": 2
+        "revenue": 852,
+        "partner": 2,
+        "partnerName": "Pacific Inc."
       },
       {
-        "revenue": 30,
-        "partner": 1
+        "revenue": 200,
+        "partner": 1,
+        "partnerName": "Atlantik Inc."
       }
     ]
   }
