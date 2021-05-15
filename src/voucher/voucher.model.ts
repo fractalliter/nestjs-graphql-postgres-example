@@ -1,4 +1,10 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
@@ -7,7 +13,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 })
 export class VoucherModel extends BaseEntity {
   @Field()
-  @PrimaryGeneratedColumn('increment', { type: 'bigint', name: 'Voucher ID' })
+  @PrimaryColumn({ type: 'bigint', name: 'Voucher ID' })
   voucherID: number;
 
   @Field()

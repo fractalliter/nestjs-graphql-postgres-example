@@ -5,6 +5,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { EmployeeModel } from '../employee/employee.model';
@@ -16,7 +17,7 @@ import { VoucherModel } from '../voucher/voucher.model';
 })
 export class OrderModel extends BaseEntity {
   @Field()
-  @PrimaryGeneratedColumn('increment', { type: 'bigint', name: 'Order ID' })
+  @PrimaryColumn({ type: 'bigint', name: 'Order ID' })
   orderID: number;
 
   @Field()

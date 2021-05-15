@@ -26,7 +26,21 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Prerequisites
+
+You need to have docker installed on your machine.
+
+## Docker
+
+you can run following command to start the graphql server.
+
+```bash
+$ docker-compose up
+```
+
+then open your prefered browser and go to `localhost:4000/graphql`
+
+## Local Installation
 
 ```bash
 $ npm install
@@ -45,7 +59,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Test (Not working right now)
 
 ```bash
 # unit tests
