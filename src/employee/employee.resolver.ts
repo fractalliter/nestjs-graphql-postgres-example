@@ -1,18 +1,33 @@
-import { Args, Int, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Int,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { EmployeeModel } from './employee.model';
 import { Inject } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
-import { TaxModel } from './tax.model';
+import { TaxDTO } from '../dto/TaxDTO';
+import { OrderModel } from '../order/order.model';
+import { OrderService } from '../order/order.service';
 
 @Resolver(() => EmployeeModel)
 export class EmployeeResolver {
   constructor(
     @Inject(EmployeeService) private employeeService: EmployeeService,
+    @Inject(OrderService) private orderService: OrderService,
   ) {}
 
   @Query(() => EmployeeModel)
   async getEmployee(@Args('id') id: number): Promise<EmployeeModel> {
     return await this.employeeService.findOneById(id);
+  }
+
+  @ResolveField()
+  orders(@Parent() employee: EmployeeModel): Promise<OrderModel[]> {
+    return this.orderService.findAll(employee.employeeID, 'employee');
   }
 
   @Query(() => [EmployeeModel])
@@ -27,8 +42,8 @@ export class EmployeeResolver {
     return await this.employeeService.benefitsLeftToSpend(month);
   }
 
-  @Query(() => [TaxModel])
-  async spendPerMonth(
+  @Query(() => [TaxDTO])
+  spendPerMonth(
     @Args('company', {
       type: () => Int,
       nullable: false,
@@ -40,7 +55,7 @@ export class EmployeeResolver {
       defaultValue: new Date().getMonth(),
     })
     month: number,
-  ): Promise<TaxModel[]> {
-    return await this.employeeService.spendPerMonth(month, company);
+  ): Promise<TaxDTO[]> {
+    return this.employeeService.spendPerMonth(month, company);
   }
 }

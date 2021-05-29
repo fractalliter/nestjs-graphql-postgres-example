@@ -15,28 +15,44 @@ describe('Employee', () => {
     await app.init();
   });
 
-  it('list all the employees grouped by company', () => {
+  it('list all the employees grouped by company spend per month', () => {
     return request(app.getHttpServer())
       .post('/graphql')
-      .send(
-        JSON.stringify({
-          operationName: null,
-          query:
-            '{\n' +
-            '  spendPerMonth(company: 1, month: 1) {\n' +
-            '    employeeID\n' +
-            '    employeeName\n' +
-            '    companyID\n' +
-            '    companyTitle\n' +
-            '    monthlyBudget\n' +
-            '    monthly\n' +
-            '    tax\n' +
-            '    total\n' +
-            '  }\n' +
-            '}\n',
-          variables: {},
-        }),
-      )
+      .send({
+        operationName: null,
+        query: `{
+               spendPerMonth(company: 1, month: 1) {
+                    employeeID
+                    employeeName
+                    companyID
+                    companyTitle
+                    monthlyBudget
+                    monthly
+                    tax
+                    total
+               }
+            }`,
+        variables: {},
+      })
+      .expect(200);
+  });
+
+  it('list all the employees with their benefits left for the month over 10 euro', () => {
+    return request(app.getHttpServer())
+      .post('/graphql')
+      .send({
+        operationName: null,
+        query: `{
+               getBenefitsLeft(month: 3){
+                    employeeID
+                    employeeName
+                    monthlyBudget
+                    companyID
+                    companyTitle
+               }
+            }`,
+        variables: {},
+      })
       .expect(200);
   });
 });

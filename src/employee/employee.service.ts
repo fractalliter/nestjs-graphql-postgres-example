@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { EmployeeModel } from './employee.model';
-import { TaxModel } from './tax.model';
+import { TaxDTO } from '../dto/TaxDTO';
 
 @Injectable()
 export class EmployeeService {
-  async findOneById(id: number): Promise<EmployeeModel> {
-    return await EmployeeModel.findOne(id);
+  findOneById(id: number): Promise<EmployeeModel> {
+    return EmployeeModel.findOne(id);
   }
 
-  async benefitsLeftToSpend(month: number): Promise<EmployeeModel[]> {
-    return await EmployeeModel.query(
+  benefitsLeftToSpend(month: number): Promise<EmployeeModel[]> {
+    return EmployeeModel.query(
       `select *
         from (
          select
@@ -29,8 +29,8 @@ export class EmployeeService {
     );
   }
 
-  async spendPerMonth(month: number, company: number): Promise<TaxModel[]> {
-    return await EmployeeModel.query(`
+  spendPerMonth(month: number, company: number): Promise<TaxDTO[]> {
+    return EmployeeModel.query(`
         select *,
           case
              when (total <= 44) then 0

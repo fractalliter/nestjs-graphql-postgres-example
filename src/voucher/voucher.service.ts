@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { VoucherModel } from './voucher.model';
-import { RevenueModel } from './revenue.model';
+import { RevenueDTO } from '../dto/RevenueDTO';
 
 @Injectable()
 export class VoucherService {
-  async getVoucherById(id: number): Promise<VoucherModel> {
-    return await VoucherModel.findOne(id);
+  getVoucherById(id: number): Promise<VoucherModel> {
+    return VoucherModel.findOne(id);
   }
 
-  async revenuePerPartner(): Promise<RevenueModel[]> {
-    return await VoucherModel.query(`
+  revenuePerPartner(): Promise<RevenueDTO[]> {
+    return VoucherModel.query(`
             select
                "Partner ID" as partner,
                "Partner Name" as "partnerName",

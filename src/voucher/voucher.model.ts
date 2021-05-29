@@ -1,13 +1,8 @@
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  PrimaryColumn,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
+import { OrderModel } from '../order/order.model';
 
-@ObjectType()
+@ObjectType('Voucher')
 @Entity({
   name: 'vouchers',
 })
@@ -27,4 +22,7 @@ export class VoucherModel extends BaseEntity {
   @Field()
   @Column({ name: 'Partner Name' })
   partnerName: string;
+
+  @Field(() => [OrderModel])
+  orders: OrderModel[];
 }

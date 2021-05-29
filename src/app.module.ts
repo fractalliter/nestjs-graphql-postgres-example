@@ -9,6 +9,7 @@ import { OrderService } from './order/order.service';
 import { OrderResolver } from './order/order.resolver';
 import { VoucherService } from './voucher/voucher.service';
 import { VoucherResolver } from './voucher/voucher.resolver';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { VoucherResolver } from './voucher/voucher.resolver';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'postgres',
+      host: 'localhost',
       port: 5432,
       username: 'postgres',
       password: 'postgres',
@@ -26,6 +27,7 @@ import { VoucherResolver } from './voucher/voucher.resolver';
       entities: ['dist/**/*.model.js'],
       synchronize: false,
     }),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [
